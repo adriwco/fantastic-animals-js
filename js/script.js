@@ -1,1 +1,1 @@
-// js
+/*script em breve*/
