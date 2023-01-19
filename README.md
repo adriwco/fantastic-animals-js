@@ -1,5 +1,7 @@
 ## <p align="center">fantastic-animals-js</p>
-🔸Efeitos com JavaScript sem plugin ou código pronto.
+<a href="https://github.com/adriwco"><img src="https://raw.githubusercontent.com/khoa083/khoa/main/Khoa_ne/img/Rainbow.gif" width="100%"/></a>
+
+#### 🔸Efeitos com JavaScript sem plugin ou código pronto.
 
 ***
 #### 🔸Pré-visualização (screenshot):
