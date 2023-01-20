@@ -77,7 +77,7 @@ initTabNav();
 function initAccordion() {
   const accordionList = document.querySelectorAll(".js-accordion dt");
   const activeClass = "ativo";
-  
+
   if (accordionList.length) {
     accordionList[0].classList.add(activeClass);
     accordionList[0].nextElementSibling.classList.add(activeClass);
@@ -93,3 +93,33 @@ function initAccordion() {
   }
 }
 initAccordion();
+
+function initScrollSuave() {
+  const linksInterno = document.querySelectorAll('.js-menu a[href^="#"');
+
+  function scrollToSection() {
+    event.preventDefault();
+    const href = this.getAttribute("href");
+    const section = document.querySelector(href);
+    // https://developer.mozilla.org/pt-BR/docs/Web/API/Element/scrollIntoView
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    /*
+    ------- forma alternativa ------- 
+      const topo = section.offsetTop;
+      // window.scrollTo(0, topo);
+      window.scrollTo({
+        top: topo,
+        behavior: "smooth",
+      });
+    ---------------------------------
+    https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
+    */
+  }
+  linksInterno.forEach((link) => {
+    link.addEventListener("click", scrollToSection);
+  });
+}
+initScrollSuave();
