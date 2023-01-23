@@ -19,7 +19,7 @@ function initTabNav() {
     // exibição texto > faq
     function faqLista(index) {
       let arrayValues = ddRules[index];
-      arrayValues.forEach((valor, index) => {  
+      arrayValues.forEach((valor, index) => {
         ddText[index].innerHTML = valor;
       });
     }
@@ -57,8 +57,8 @@ initAccordion();
 function initScrollSuave() {
   const linksInterno = document.querySelectorAll('.js-menu a[href^="#"');
 
-  function scrollToSection() {
-    this.preventDefault();
+  function scrollToSection(event) {
+    event.preventDefault();
     const href = this.getAttribute("href");
     const section = document.querySelector(href);
     // https://developer.mozilla.org/pt-BR/docs/Web/API/Element/scrollIntoView

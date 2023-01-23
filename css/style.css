@@ -19,9 +19,7 @@ img {
   border-radius: 5px;
 }
 /*_______________ GRID GERAL _______________*/
-html {
-  scroll-behavior: smooth;
-}
+
 body {
   background-color: #faf6ed;
   color: #222;
