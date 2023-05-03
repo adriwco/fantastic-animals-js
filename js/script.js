@@ -1,8 +1,8 @@
 import { ddRules } from "./ddRules.js";
 
 function initTabNav() {
-  const tabMenu = document.querySelectorAll(".js-tabmenu li");
-  const tabContent = document.querySelectorAll(".js-tabcontent section");
+  const tabMenu = document.querySelectorAll("[data-tab='menu'] li");
+  const tabContent = document.querySelectorAll("[data-tab='content'] section");
   const ddText = document.querySelectorAll(".faq-lista dd");
 
   if (tabMenu.length && tabContent.length) {
@@ -13,7 +13,8 @@ function initTabNav() {
       tabContent.forEach((section) => {
         section.classList.remove("ativo");
       });
-      tabContent[index].classList.add("ativo");
+      const direcao = tabContent[index].dataset.anime;
+      tabContent[index].classList.add("ativo", direcao);
     }
 
     // exibição texto > faq
@@ -35,7 +36,9 @@ function initTabNav() {
 initTabNav();
 
 function initAccordion() {
-  const accordionList = document.querySelectorAll(".js-accordion dt");
+  const accordionList = document.querySelectorAll(
+    "[data-anime='accordion'] dt"
+  );
   const activeClass = "ativo";
 
   if (accordionList.length) {
@@ -55,7 +58,9 @@ function initAccordion() {
 initAccordion();
 
 function initScrollSuave() {
-  const linksInterno = document.querySelectorAll('.js-menu a[href^="#"');
+  const linksInterno = document.querySelectorAll(
+    '[data-menu="suave"] a[href^="#"'
+  );
 
   function scrollToSection(event) {
     event.preventDefault();
@@ -85,7 +90,7 @@ function initScrollSuave() {
 initScrollSuave();
 
 function initAnimacaoScroll() {
-  const sections = document.querySelectorAll(".js-scroll");
+  const sections = document.querySelectorAll("[data-anime='scroll']");
 
   if (sections.length) {
     const windowMetade = window.innerHeight * 0.6;
