@@ -1,111 +1,32 @@
-import { ddRules } from "./ddRules.js";
-
-function initTabNav() {
-  const tabMenu = document.querySelectorAll("[data-tab='menu'] li");
-  const tabContent = document.querySelectorAll("[data-tab='content'] section");
-  const ddText = document.querySelectorAll(".faq-lista dd");
-
-  if (tabMenu.length && tabContent.length) {
-    tabContent[0].classList.add("ativo");
-
-    // exibição texto > fotos
-    function activeTab(index) {
-      tabContent.forEach((section) => {
-        section.classList.remove("ativo");
-      });
-      const direcao = tabContent[index].dataset.anime;
-      tabContent[index].classList.add("ativo", direcao);
-    }
-
-    // exibição texto > faq
-    function faqLista(index) {
-      let arrayValues = ddRules[index];
-      arrayValues.forEach((valor, index) => {
-        ddText[index].innerHTML = valor;
-      });
-    }
-
-    tabMenu.forEach((itemMenu, index) => {
-      itemMenu.addEventListener("click", () => {
-        activeTab(index);
-        faqLista(index);
-      });
-    });
-  }
-}
+import initTabNav from "./modules/tabnav.js";
+import initAccordion from "./modules/accordion.js";
+import initScrollSuave from "./modules/scroll-suave.js";
+import initAnimacaoScroll from "./modules/scroll-animacao.js";
 initTabNav();
-
-function initAccordion() {
-  const accordionList = document.querySelectorAll(
-    "[data-anime='accordion'] dt"
-  );
-  const activeClass = "ativo";
-
-  if (accordionList.length) {
-    accordionList[0].classList.add(activeClass);
-    accordionList[0].nextElementSibling.classList.add(activeClass);
-
-    function activeAccordion() {
-      this.classList.toggle(activeClass);
-      this.nextElementSibling.classList.toggle(activeClass);
-    }
-
-    accordionList.forEach((item) => {
-      item.addEventListener("click", activeAccordion);
-    });
-  }
-}
 initAccordion();
-
-function initScrollSuave() {
-  const linksInterno = document.querySelectorAll(
-    '[data-menu="suave"] a[href^="#"'
-  );
-
-  function scrollToSection(event) {
-    event.preventDefault();
-    const href = this.getAttribute("href");
-    const section = document.querySelector(href);
-    // https://developer.mozilla.org/pt-BR/docs/Web/API/Element/scrollIntoView
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-    /*
-    ------- forma alternativa ------- 
-      const topo = section.offsetTop;
-      // window.scrollTo(0, topo);
-      window.scrollTo({
-        top: topo,
-        behavior: "smooth",
-      });
-    ---------------------------------
-    https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
-    */
-  }
-  linksInterno.forEach((link) => {
-    link.addEventListener("click", scrollToSection);
-  });
-}
 initScrollSuave();
-
-function initAnimacaoScroll() {
-  const sections = document.querySelectorAll("[data-anime='scroll']");
-
-  if (sections.length) {
-    const windowMetade = window.innerHeight * 0.6;
-
-    function animaScroll() {
-      sections.forEach((section) => {
-        const sectionTop = section.getBoundingClientRect().top;
-        const isSectionVisible = sectionTop - windowMetade < 0;
-        if (isSectionVisible) section.classList.add("ativo");
-        else section.classList.remove("ativo");
-      });
-    }
-    animaScroll(); // exibir a 1° section
-
-    window.addEventListener("scroll", animaScroll);
-  }
-}
 initAnimacaoScroll();
+
+// Sobre modules:
+// modules são assíncrono, Strict mode e this fora de um objeto faz referência a undefined ao invés de window.
+// assíncrono = carrega o que dá para carregar primeiro sem esperar outro carregar, mas executa na ordem.
+// O modo estrito previne que algumas ações consideradas erros. Basta adicionarmos 'use strict' no topo de um arquivo, que ele entrará neste modo. Por padrão todo module está no modo estrito.
+import teste0001 from "./modules/teste1.js"
+teste0001(); // console.log() = teste 1 | sem default = erro | nome da function pode ser diferente
+import {teste2A, teste2B} from "./modules/teste2.js"
+teste2A(); // console.log() = teste 2A | sem default = precisa de {} | nome da function não pode diferente
+// pode mudar nome se... import {teste2A as novoNome} from "./modules/teste2.js"
+teste2B() // console.log() = teste 2B
+// O ideal é exportar apenas uma coisa, mas existe bibliotecas com varias funções de ajuda que acaba sendo exportado mais de uma função...
+// Exportando sem saber os nomes...
+import * as teste2 from "./modules/teste2.js"
+teste2.teste2A(); // console.log() = teste 2A
+teste2.teste2B(); // console.log() = teste 2B
+/*
+Exemplo Strict mode:
+'use strict';
+nome = 'Ford'; // erro, variável global
+delete Array.prototype; // erro, não deletável
+window.top = 200; // erro, não pode mudar
+const arguments = 3.14; // escrever em palavra reservada
+*/
