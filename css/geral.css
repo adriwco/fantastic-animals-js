@@ -139,7 +139,12 @@ body {
 }
 .iframe-googleMaps {
   grid-column: 2;
+  padding: 10px;
 }
+.iframe-googleMaps iframe{
+ max-width: 280px;
+}
+
 .dados {
   grid-column: 3;
 }
@@ -158,6 +163,11 @@ body {
   margin-right: 10px;
   background-color: #fb5;
 }
+.dados span{
+  border: 1px solid #222;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
 .copy {
   grid-column: 3/5;
   margin-bottom: 2rem;
@@ -168,6 +178,7 @@ body {
   padding: 23px;
   font-family: "IBM Plex Mono", monospace;
 }
+
 @media (max-width: 700px) {
   .grid-container {
     grid-template-columns: 1fr;
@@ -191,8 +202,11 @@ body {
   }
   .iframe-googleMaps,
   iframe {
-    width: 100%;
+  width: 100%;
   }
+  .iframe-googleMaps iframe{
+    max-width: 100%;
+   }
   .titulo {
     font-size: 3rem;
   }
