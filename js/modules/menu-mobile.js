@@ -15,7 +15,6 @@ export default function initMenuMobile() {
         menuButton.classList.remove("active");
         menuButton.setAttribute("aria-expanded", "false");
       });
-      console.log(e.target);
     }
 
     eventos.forEach((userEvent) => {
